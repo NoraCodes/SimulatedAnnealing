@@ -1,5 +1,7 @@
 package codes.nora.simulatedAnnealing;
 
+/* From the provided "Casual Tutorial" */
+
 import java.util.ArrayList;
 import java.util.Collections;
 

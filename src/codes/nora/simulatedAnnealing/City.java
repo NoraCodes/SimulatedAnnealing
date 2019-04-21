@@ -1,5 +1,7 @@
 package codes.nora.simulatedAnnealing;
 
+/* From the provided "Casual Tutorial" */
+
 public class City {
     int x;
     int y;
