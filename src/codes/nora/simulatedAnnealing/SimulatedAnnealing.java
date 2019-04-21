@@ -69,7 +69,7 @@ public abstract class SimulatedAnnealing {
      *  to be *just* large enough so that one solution will be able to jump to any
      *  other solution.)
      *
-     * @param timeToRun How long the algorithm should run, in seconds.
+     * @param howLongToRunSimulation How long the algorithm should run, in seconds.
      */
     public static void initializeSetup( long howLongToRunSimulation ) {
         startTemperature = 500000;   // Half a million degrees
