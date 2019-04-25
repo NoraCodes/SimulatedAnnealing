@@ -46,16 +46,13 @@ public abstract class SimulatedAnnealing {
     }
 
 
-
     /** A method to create the original problem to be analyzed. This should create
      *  a static representation of the problem, so that all instances have access
      *  to that data. Consequently, this method itself should be static.
      *
      *  This method must be overridden.
      */
-    static protected void initializeProblem( ) {
-
-    }
+    abstract protected void initializeProblem();
 
 
     /** Set the initial temperature of the problem search space.
@@ -116,17 +113,7 @@ public abstract class SimulatedAnnealing {
     /** Based on the relative costs, and the current energy (temperature) of the
      *  situation, decide whether to accept the new solution as a replacement
      *  for the current solution.											*/
-    private boolean acceptSolution( double costOfPrevious, double costOfNew) {
-        if (costOfNew < costOfPrevious) {
-            return true;
-        } else {
-            /* Here you need code to look at the difference in costs, look
-             * at the current temperature, and decide whether to do the
-             * replacement or not.
-             */
-            return false; // Dummy code so this compiles. Replace!
-        }
-    };
+    abstract protected boolean acceptSolution( double costOfPrevious, double costOfNew);
 
 
     /** Create a String representation of the current solution. */
@@ -151,7 +138,7 @@ public abstract class SimulatedAnnealing {
         double originalCost, replacementCost;
 
         initializeSetup( timeToRunSimulation );
-        randomize( );		// Get a (probably bad) solution to start from.
+        randomize();		// Get a (probably bad) solution to start from.
         while (getTemperature() > 0) {
             originalCost = getCost();     // Or, remember this value from the last loop.
             possibleReplacement = clone();
