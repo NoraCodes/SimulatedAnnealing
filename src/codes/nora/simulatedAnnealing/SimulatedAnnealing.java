@@ -52,7 +52,7 @@ public abstract class SimulatedAnnealing {
      *
      *  This method must be overridden.
      */
-    abstract protected void initializeProblem();
+    private static void initializeProblem() {}
 
 
     /** Set the initial temperature of the problem search space.

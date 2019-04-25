@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class TravelingSalesman extends SimulatedAnnealing {
-    protected void initializeProblem() {
+    private static void initializeProblem() {
         // Create and add our cities
         TourManager.addCity(new City(60, 200));
         TourManager.addCity(new City(180, 200));
@@ -87,12 +87,12 @@ public class TravelingSalesman extends SimulatedAnnealing {
         return totalDistance;
     }
 
+    private Random rand = new Random();
     @Override
     private boolean acceptSolution(double costOfPrevious, double costOfNew) {
         if (costOfNew < costOfPrevious) {
             return true;
         } else {
-            Random rand = new Random();
             return (Math.exp(-(costOfNew - costOfPrevious)/getTemperature()) < rand.nextDouble());
         }
     }
@@ -112,5 +112,16 @@ public class TravelingSalesman extends SimulatedAnnealing {
             }
         }
         return all;
+    }
+
+    @Override
+    protected void mutate() {
+        int firstSwapee = rand.nextInt(tour.size());
+        // Second swapee should be at least 2 away since 1 away has already been tried in local optimization.
+        int secondSwapee = (rand.nextInt(Math.max(tour.size() - 3, 1)) + firstSwapee)%tour.size();
+
+        City temp = (City) tour.get(firstSwapee);
+        tour.set(firstSwapee, tour.get(secondSwapee));
+        tour.set(secondSwapee, temp);
     }
 }
