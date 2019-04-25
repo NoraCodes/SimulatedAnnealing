@@ -87,9 +87,8 @@ public class TravelingSalesman extends SimulatedAnnealing {
         return totalDistance;
     }
 
-    private Random rand = new Random();
-    @Override
-    private boolean acceptSolution(double costOfPrevious, double costOfNew) {
+    private static Random rand = new Random();
+    protected static boolean acceptSolution(double costOfPrevious, double costOfNew) {
         if (costOfNew < costOfPrevious) {
             return true;
         } else {

@@ -113,7 +113,9 @@ public abstract class SimulatedAnnealing {
     /** Based on the relative costs, and the current energy (temperature) of the
      *  situation, decide whether to accept the new solution as a replacement
      *  for the current solution.											*/
-    abstract protected boolean acceptSolution( double costOfPrevious, double costOfNew);
+    protected static boolean acceptSolution( double costOfPrevious, double costOfNew) {
+        return true;
+    }
 
 
     /** Create a String representation of the current solution. */
