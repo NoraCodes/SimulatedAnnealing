@@ -38,10 +38,6 @@ public class TravelingSalesman extends SimulatedAnnealing {
 
     private ArrayList tour = new ArrayList<City>();
 
-    public ArrayList getTour() {
-        return tour;
-    }
-
     @Override
     protected void randomize() {
         for (int cityIndex = 0; cityIndex < TourManager.numberOfCities(); cityIndex++) {
@@ -96,6 +92,13 @@ public class TravelingSalesman extends SimulatedAnnealing {
         }
     }
 
+    private static double estimateTemperature() {
+        // Average length over 10 iterations
+        for (int i = 0; i < 10; i++) {
+            for (int cityIndex = 0; cityIndex < )
+        }
+    }
+
     @Override
     public String toString() {
         String all = "";
@@ -103,9 +106,7 @@ public class TravelingSalesman extends SimulatedAnnealing {
             return all;
         }
         for (int cityIndex = 0; cityIndex < tour.size() + 1; cityIndex++) {
-            int xcoord = ((City) tour.get(cityIndex%tour.size())).getX();
-            int ycoord = ((City) tour.get(cityIndex%tour.size())).getY();
-            all += "(" + Integer.toString(xcoord) + "," + Integer.toString(ycoord) + ")";
+            all += "(" + tour.get(cityIndex%tour.size()) + ")";
             if (cityIndex != tour.size()) {
                 all += " | ";
             }
