@@ -36,7 +36,34 @@ public class TravelingSalesman extends SimulatedAnnealing {
         return Math.max(theTemperature, 0);
     }
 
-    private ArrayList tour = new ArrayList<City>();
+    private ArrayList<City> tour = new ArrayList<City>();
+
+    public ArrayList<City> getTour() {
+        return tour;
+    }
+
+    public TravelingSalesman () {
+        initializeProblem();
+        randomize();
+    }
+
+    private TravelingSalesman (ArrayList<City> cities) {
+        this.tour = cities;
+    }
+
+    @Override
+    protected void copyData(SimulatedAnnealing toCopy) {
+        this.tour = ((TravelingSalesman) toCopy).tour;
+    }
+
+    @Override
+    protected TravelingSalesman clone() {
+        ArrayList<City> n = new ArrayList<City>();
+        for (City c : this.tour) {
+            n.add(c);
+        }
+        return new TravelingSalesman(n);
+    }
 
     @Override
     protected void randomize() {
@@ -53,7 +80,7 @@ public class TravelingSalesman extends SimulatedAnnealing {
         // who really knows???
         while (hasChanged == true) {
             hasChanged = false;
-            for (int cityIndex = 0; cityIndex < tour.size(); cityIndex++) {
+            for (int cityIndex = 1; cityIndex < tour.size(); cityIndex++) {
                 // This could be optimized by just swapping positions in memory and storing them in some array with a
                 // moving starting index but I'm, ... what do they call it? ... lazy? I think that's the word.
                 City previousCity = (City) tour.get((cityIndex - 1) % tour.size());
@@ -92,13 +119,6 @@ public class TravelingSalesman extends SimulatedAnnealing {
         }
     }
 
-    private static double estimateTemperature() {
-        // Average length over 10 iterations
-        for (int i = 0; i < 10; i++) {
-            for (int cityIndex = 0; cityIndex < )
-        }
-    }
-
     @Override
     public String toString() {
         String all = "";
@@ -118,7 +138,7 @@ public class TravelingSalesman extends SimulatedAnnealing {
     protected void mutate() {
         int firstSwapee = rand.nextInt(tour.size());
         // Second swapee should be at least 2 away since 1 away has already been tried in local optimization.
-        int secondSwapee = (rand.nextInt(Math.max(tour.size() - 3, 1)) + firstSwapee)%tour.size();
+        int secondSwapee = (rand.nextInt(Math.max(tour.size() - 3, 1)) + firstSwapee) % tour.size();
 
         City temp = (City) tour.get(firstSwapee);
         tour.set(firstSwapee, tour.get(secondSwapee));
